@@ -12,61 +12,58 @@ import Dashboard from './components/Dashboard';
 
 import './App.css';
 
-function App() {
+export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [appointments, setAppointments] = useState([]); // Track booked appointments
 
   return (
-    <BrowserRouter>
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      <Routes>
-        <Route
-          path="/"
-          element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
-        />
-        <Route path="/about" element={<About />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        
-        <Route
-          path="/appointment"
-          element={
-            isLoggedIn ? (
-              <AppointmentBooking setAppointments={setAppointments} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-
-        <Route
-          path="/dashboard"
-          element={
-            isLoggedIn ? (
-              <Dashboard appointments={appointments} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-
-        {/* New Route for Prescription */}
-        <Route
-          path="/prescription"
-          element={
-            isLoggedIn ? (
-              <Prescription />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <div className="container">
+      <h1>Welcome to My Styled React App</h1>
+      
+      <BrowserRouter>
+        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Routes>
+          <Route
+            path="/"
+            element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
+          />
+          <Route path="/about" element={<About />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/login"
+            element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          />
+          <Route
+            path="/appointment"
+            element={
+              isLoggedIn ? (
+                <AppointmentBooking setAppointments={setAppointments} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              isLoggedIn ? (
+                <Dashboard appointments={appointments} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/prescription"
+            element={isLoggedIn ? <Prescription /> : <Navigate to="/login" />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
-export default App;
+
 
 
 
